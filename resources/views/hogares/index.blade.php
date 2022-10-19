@@ -49,6 +49,21 @@
 </x-app-layout>
 
 <style>
+    .card_hogares {
+        width: 300px;
+        height: 400px;
+        background: #666;
+        margin: 20px;
+    }
+
+    .hogares {
+        display: flex;
+        padding: 0 2rem;
+        justify-content: center;
+        transition: 0.5s;
+        flex-wrap: wrap;
+    }
+
     .hovercat{
         position: absolute;
         left: 0;
