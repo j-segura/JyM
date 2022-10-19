@@ -23,17 +23,6 @@
             'route' => '#',
             'active' => '#',
         ],
-        [
-            'name' => 'Casas',
-            'route' => '#',
-            'active' => '#',
-        ],
-
-        [
-            'name' => 'Nosotros',
-            'route' => '#',
-            'active' => '#',
-        ],
     ];
 @endphp
 
@@ -310,8 +299,6 @@
         z-index: 3 !important;
         width: 100%;
     }
-
-
 
     .link {
         display: flex;
