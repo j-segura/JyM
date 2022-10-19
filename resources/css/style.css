@@ -1,0 +1,64 @@
+.nav_bar {
+    background-color: rgb(40, 40, 40);
+    z-index: 3 !important;
+    width: 100%;
+}
+
+
+
+.link {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: rgb(255, 255, 255);
+    text-decoration: none;
+}
+
+a:hover {
+    color: #66bb4f !important;
+}
+
+.link_active {
+    color: #66bb4f;
+    font-weight: 700;
+}
+
+.logo {
+    text-decoration: none;
+    color: #fff;
+    font-size: 30px;
+}
+
+.logo img {
+    width: 180px;
+    height: auto;
+}
+
+.login {
+    color: rgb(255, 255, 255);
+    text-decoration: none;
+    margin-right: 10px;
+}
+
+.registro {
+    color: #66bb4f;
+    border: 1px solid #66bb4f;
+    text-decoration: none;
+    padding: 4px 20px;
+    transition: 0.3s;
+    border-radius: 15px;
+}
+
+.registro:hover {
+    color: black !important;
+    font-weight: 600;
+    background-color:#66bb4f;
+    border: none;
+}
+
+@media(max-width: 1024px){
+    .login,
+    .registro {
+        display: none;
+    }
+}
