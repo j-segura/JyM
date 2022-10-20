@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 
 Route::view('/', 'hogares.index')->name('home');
+Route::view('show', 'hogares.show')->name('hogares.show');
 
 Route::middleware([
     'auth:sanctum',
