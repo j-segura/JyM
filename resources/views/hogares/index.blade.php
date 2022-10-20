@@ -39,21 +39,124 @@
     </section>
 
     <section class="hogares">
-        <a href="" class="card_hogares"></a>
-        <a href="" class="card_hogares"></a>
-        <a href="" class="card_hogares"></a>
-        <a href="" class="card_hogares"></a>
-        <a href="" class="card_hogares"></a>
-        <a href="" class="card_hogares"></a>
-    </section>
+        <a href="" class="card_hogares shadow-2xl">
+            <img src="{{asset('img/hogares/casa1.jpg')}}">
+            <div class="hogar_data">
+                <div class="tags">
+                    <span>Rural</span>
+                    <span>200m2</span>
+                </div>
+                <h2>Canada, Toronto</h2>
+                <p>$200.000.000</p>
+            </div>
+        </a>
+        <a href="" class="card_hogares shadow-2xl">
+            <img src="{{asset('img/hogares/casa2.jpg')}}">
+            <div class="hogar_data">
+                <div class="tags">
+                    <span>Urbana</span>
+                    <span>200m2</span>
+                </div>
+                <h2>Canada, Toronto</h2>
+                <p>$200.000.000</p>
+            </div>
+        </a>
+        <a href="" class="card_hogares shadow-2xl">
+            <img src="{{asset('img/hogares/departamento.jpg')}}">
+            <div class="hogar_data">
+                <div class="tags">
+                    <span>Urbana</span>
+                    <span>200m2</span>
+                </div>
+                <h2>Canada, Toronto</h2>
+                <p>$200.000.000</p>
+            </div>
+        </a>
+        <a href="" class="card_hogares shadow-2xl">
+            <img src="{{asset('img/hogares/casa1.jpg')}}">
+            <div class="hogar_data">
+                <div class="tags">
+                    <span>Rural</span>
+                    <span>200m2</span>
+                </div>
+                <h2>Canada, Toronto</h2>
+                <p>$200.000.000</p>
+            </div>
+        </a>
+        <a href="" class="card_hogares shadow-2xl">
+            <img src="{{asset('img/hogares/casa2.jpg')}}">
+            <div class="hogar_data">
+                <div class="tags">
+                    <span>Urbana</span>
+                    <span>200m2</span>
+                </div>
+                <h2>Canada, Toronto</h2>
+                <p>$200.000.000</p>
+            </div>
+        </a>
+        <a href="" class="card_hogares shadow-2xl">
+            <img src="{{asset('img/hogares/departamento.jpg')}}">
+            <div class="hogar_data">
+                <div class="tags">
+                    <span>Urbana</span>
+                    <span>200m2</span>
+                </div>
+                <h2>Canada, Toronto</h2>
+                <p>$200.000.000</p>
+            </div>
+        </a>
 </x-app-layout>
 
 <style>
+    .tags {
+        display: flex;
+        margin-bottom: 6px;
+    }
+
+    .tags span {
+        padding: 0px 6px;
+        background: rgb(223, 223, 223);
+        margin-right: 5px;
+        font-size: 0.9rem;
+        border-radius: 3px;
+    }
+
+    .hogar_data {
+        padding: 1rem;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
+
+    .hogar_data h2 {
+        font-size: 1.3rem;
+        font-weight: 600;
+    }
+
+    .hogar_data p {
+        font-size: 1.1rem;
+        letter-spacing: 1px;
+        color: rgb(68, 55, 255);
+    }
+
     .card_hogares {
         width: 300px;
         height: 400px;
-        background: #666;
+        background: rgb(255, 255, 255);
         margin: 20px;
+        border-radius: 10px;
+        overflow: hidden;
+        transition: 0.2s;
+    }
+
+    .card_hogares:hover {
+        transform: translateY(-5px);
+    }
+
+    .card_hogares img {
+        width: 100%;
+        height: 280px;
+        object-fit: cover;
     }
 
     .hogares {
