@@ -1,9 +1,10 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\IndexController;
 
-Route::view('/', 'hogares.index')->name('home');
-Route::view('show', 'hogares.show')->name('hogares.show');
+Route::get('/', [IndexController::class, 'index'])->name('home');
+Route::get('home/{home}', [IndexController::class, 'show'])->name('homes.show');
 
 Route::middleware([
     'auth:sanctum',

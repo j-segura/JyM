@@ -13,24 +13,14 @@
     </section>
 
     <section class="categories">
-        <a class="card">
-            <img src="{{ asset('img/categorias/apar.jpg')}}">
-            <div class="hovercat">
-                <span>Apartamentos</span>
-            </div>
-        </a>
-        <a class="card">
-            <img src="{{ asset('img/categorias/casa.jpg')}}">
-            <div class="hovercat">
-                <span>Casas</span>
-            </div>
-        </a>
-        <a class="card">
-            <img src="{{ asset('img/categorias/finca.jpg')}}">
-            <div class="hovercat">
-                <span>Fincas</span>
-            </div>
-        </a>
+        @foreach ($categorias as $categoria)
+            <a class="card">
+                <img src="/img/categorias/{{ $categoria->image }}">
+                <div class="hovercat">
+                    <span>{{ $categoria->name }}</span>
+                </div>
+            </a>
+        @endforeach
     </section>
 
     <section class="header" id="header">
@@ -39,75 +29,35 @@
     </section>
 
     <section class="hogares">
-        <a href="" class="card_hogares shadow-2xl">
-            <img src="{{asset('img/hogares/casa1.jpg')}}">
-            <div class="hogar_data">
-                <div class="tags">
-                    <span>Rural</span>
-                    <span>200m2</span>
+        @foreach ($homes as $home)
+            <a href="{{ route('homes.show', $home) }}" class="card_hogares shadow-2xl">
+                <img src="img/hogares/{{ $home->image }}">
+                <div class="hogar_data">
+                    <div class="tags">
+                        <span>{{ $home->zone->name }}</span>
+                        <span>{{ $home->metrosCuadrados }}m2</span>
+                    </div>
+                    <h2>{{ $home->name }}</h2>
+                    <p>${{ $home->valor }}</p>
                 </div>
-                <h2>Canada, Toronto</h2>
-                <p>$200.000.000</p>
-            </div>
-        </a>
-        <a href="" class="card_hogares shadow-2xl">
-            <img src="{{asset('img/hogares/casa2.jpg')}}">
-            <div class="hogar_data">
-                <div class="tags">
-                    <span>Urbana</span>
-                    <span>200m2</span>
-                </div>
-                <h2>Canada, Toronto</h2>
-                <p>$200.000.000</p>
-            </div>
-        </a>
-        <a href="" class="card_hogares shadow-2xl">
-            <img src="{{asset('img/hogares/departamento.jpg')}}">
-            <div class="hogar_data">
-                <div class="tags">
-                    <span>Urbana</span>
-                    <span>200m2</span>
-                </div>
-                <h2>Canada, Toronto</h2>
-                <p>$200.000.000</p>
-            </div>
-        </a>
-        <a href="" class="card_hogares shadow-2xl">
-            <img src="{{asset('img/hogares/casa1.jpg')}}">
-            <div class="hogar_data">
-                <div class="tags">
-                    <span>Rural</span>
-                    <span>200m2</span>
-                </div>
-                <h2>Canada, Toronto</h2>
-                <p>$200.000.000</p>
-            </div>
-        </a>
-        <a href="" class="card_hogares shadow-2xl">
-            <img src="{{asset('img/hogares/casa2.jpg')}}">
-            <div class="hogar_data">
-                <div class="tags">
-                    <span>Urbana</span>
-                    <span>200m2</span>
-                </div>
-                <h2>Canada, Toronto</h2>
-                <p>$200.000.000</p>
-            </div>
-        </a>
-        <a href="" class="card_hogares shadow-2xl">
-            <img src="{{asset('img/hogares/departamento.jpg')}}">
-            <div class="hogar_data">
-                <div class="tags">
-                    <span>Urbana</span>
-                    <span>200m2</span>
-                </div>
-                <h2>Canada, Toronto</h2>
-                <p>$200.000.000</p>
-            </div>
-        </a>
+            </a>
+        @endforeach
+
+        <div class="links">
+            {{ $homes->links() }}
+        </div>
+
+    </section>
 </x-app-layout>
 
 <style>
+    .links {
+        width: 80%;
+        margin: auto;
+        margin-top: 3rem;
+        margin-bottom: 3rem;
+    }
+
     .tags {
         display: flex;
         margin-bottom: 6px;
@@ -167,7 +117,7 @@
         flex-wrap: wrap;
     }
 
-    .hovercat{
+    .hovercat {
         position: absolute;
         left: 0;
         top: 0;
@@ -187,7 +137,7 @@
         font-size: 1.5rem;
     }
 
-    .categories .card:hover .hovercat{
+    .categories .card:hover .hovercat {
         visibility: visible;
     }
 
@@ -219,7 +169,7 @@
         text-align: center;
     }
 
-    .header h1{
+    .header h1 {
         color: #111;
         font-size: 2rem;
         font-weight: 500;

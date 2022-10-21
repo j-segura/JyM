@@ -38,6 +38,7 @@ class HomeFactory extends Factory
                 'casa2.jpg',
                 'departamento.jpg',
             ]),
+            'descripcion' => $this->faker->text(500),
             'categoria_id' => Categoria::all()->random()->id,
             'location_id' => Location::all()->random()->id,
             'zone_id' => Zone::all()->random()->id,

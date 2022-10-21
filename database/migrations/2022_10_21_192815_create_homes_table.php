@@ -21,6 +21,7 @@ return new class extends Migration
             $table->string('valor');
             $table->string('direccion');
             $table->string('image');
+            $table->longText('descripcion');
 
             $table->unsignedBigInteger('categoria_id');
             $table->unsignedBigInteger('location_id');
