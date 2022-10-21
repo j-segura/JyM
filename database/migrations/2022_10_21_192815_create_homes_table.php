@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('name', 45);
             $table->string('slug');
             $table->string('metrosCuadrados');
-            $table->integer('valor');
+            $table->string('valor');
             $table->string('direccion');
             $table->string('image');
 

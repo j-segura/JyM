@@ -6,6 +6,7 @@ namespace Database\Seeders;
 use Illuminate\Database\Seeder;
 use App\Models\Location;
 use App\Models\Zone;
+use App\Models\Home;
 
 class DatabaseSeeder extends Seeder
 {
@@ -16,16 +17,10 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        // \App\Models\User::factory(10)->create();
-
-        // \App\Models\User::factory()->create([
-        //     'name' => 'Test User',
-        //     'email' => 'test@example.com',
-        // ]);
-
         $this->call(UserSeeder::class);
         $this->call(CategoriaSeeder::class);
         Location::factory(20)->create();
         Zone::factory(4)->create();
+        Home::factory(50)->create();
     }
 }
