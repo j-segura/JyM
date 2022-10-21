@@ -2,7 +2,7 @@
     <section class="show_view">
         <div class="show">
             <figure>
-                <img src="/img/hogares/departamento.jpg">
+                <img src="/img/hogares/{{ $home->image }}">
             </figure>
             <div class="show_data">
                 <h1>{{ $home->name }}</h1>
