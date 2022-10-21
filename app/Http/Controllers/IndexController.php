@@ -17,4 +17,14 @@ class IndexController extends Controller
     public function show(Home $home){
         return view('homes.show', compact('home'));
     }
+
+    public function categoria(Categoria $categoria){
+
+        $homes = Home::where('categoria_id', $categoria->id)
+                            ->latest('id')
+                            ->paginate(9);
+
+        return view('homes.categoria', compact('homes', 'categoria'));
+    }
+
 }

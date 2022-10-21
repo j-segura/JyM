@@ -5,6 +5,7 @@ use App\Http\Controllers\IndexController;
 
 Route::get('/', [IndexController::class, 'index'])->name('home');
 Route::get('home/{home}', [IndexController::class, 'show'])->name('homes.show');
+Route::get('categoria/{categoria}', [IndexController::class, 'categoria'])->name('homes.categoria');
 
 Route::middleware([
     'auth:sanctum',

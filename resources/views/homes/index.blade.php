@@ -14,7 +14,7 @@
 
     <section class="categories">
         @foreach ($categorias as $categoria)
-            <a class="card">
+            <a class="card" href="{{ route('homes.categoria', $categoria) }}">
                 <img src="/img/categorias/{{ $categoria->image }}">
                 <div class="hovercat">
                     <span>{{ $categoria->name }}</span>
