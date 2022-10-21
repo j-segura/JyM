@@ -9,6 +9,8 @@ class Home extends Model
 {
     use HasFactory;
 
+    protected $guarded = [];
+
     //relacion uno a muchos(inversa)
 
     public function categoria(){

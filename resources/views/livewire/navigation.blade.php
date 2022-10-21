@@ -25,11 +25,11 @@
                 <!-- Navigation Links -->
                 <div class="hidden space-x-8 lg:-my-px lg:ml-10 lg:flex">
 
-                    {{-- @auth
+                    @auth
                         <x-jet-nav-link href="{{ route('admin.home') }}" :active="request()->routeIs('admin.home')">
                             Administracion
                         </x-jet-nav-link>
-                    @endauth --}}
+                    @endauth
 
                     @foreach ($nav_links as $nav_link)
                         <x-jet-nav-link href="{{ $nav_link['route'] }}" :active="$nav_link['active']">
@@ -188,11 +188,11 @@
         <!-- Responsive Navigation Menu -->
         <div :class="{ 'block': open, 'hidden': !open }" class="hidden lg:hidden">
             <div class="pt-2 pb-3 space-y-1">
-                {{-- @auth
-                <x-jet-responsive-nav-link href="{{ route('admin.home') }}" :active="request()->routeIs('admin.home')">
-                    Administracion
-                </x-jet-responsive-nav-link>
-            @endauth --}}
+                @auth
+                    <x-jet-responsive-nav-link href="{{ route('admin.home') }}" :active="request()->routeIs('admin.home')">
+                        Administracion
+                    </x-jet-responsive-nav-link>
+                @endauth
                 @foreach ($nav_links as $nav_link)
                     <x-jet-responsive-nav-link href="{{ $nav_link['route'] }}" :active="$nav_link['active']">
                         {{ $nav_link['name'] }}
@@ -200,8 +200,7 @@
                 @endforeach
 
                 @foreach ($categorias as $categoria)
-                    <x-jet-responsive-nav-link href="{{ route('homes.categoria', $categoria) }}"
-                        :active="request()->routeIs('contenidos.categoria', $categoria)">
+                    <x-jet-responsive-nav-link href="{{ route('homes.categoria', $categoria) }}" :active="request()->routeIs('contenidos.categoria', $categoria)">
                         {{ $categoria->name }}
                     </x-jet-responsive-nav-link>
                 @endforeach

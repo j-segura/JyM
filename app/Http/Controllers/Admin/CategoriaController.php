@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Models\Categoria;
 
 class CategoriaController extends Controller
 {
@@ -14,7 +15,8 @@ class CategoriaController extends Controller
      */
     public function index()
     {
-        //
+        $categorias = Categoria::orderBy('id', 'desc')->get();
+        return view('admin.categorias.index', compact('categorias'));
     }
 
     /**
@@ -24,7 +26,7 @@ class CategoriaController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.categorias.create');
     }
 
     /**
@@ -35,7 +37,24 @@ class CategoriaController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'name' => 'required',
+            'slug' => 'required|unique:categorias',
+            'image' => 'required|image|max:2048',
+        ]);
+
+        $categoria = $request->all();
+
+        if ($image = $request->file('image')) {
+            $rutaGuardarImg = 'img/categorias/';
+            $imageCategoria = date('YmdHis') . "." . $image->getClientOriginalExtension();
+            $image->move($rutaGuardarImg, $imageCategoria);
+            $categoria['image'] = "$imageCategoria";
+        }
+
+        $categoria = Categoria::create($categoria);
+
+        return redirect()->route('admin.categorias.edit', compact('categoria'))->with('info', 'La categoria se creo con exito');
     }
 
     /**
@@ -44,7 +63,7 @@ class CategoriaController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Categoria $categoria)
     {
         //
     }
@@ -55,9 +74,9 @@ class CategoriaController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Categoria $categoria)
     {
-        //
+        return view('admin.categorias.edit', compact('categoria'));
     }
 
     /**
@@ -67,9 +86,27 @@ class CategoriaController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Categoria $categoria)
     {
-        //
+        $request->validate([
+            'name' => 'required',
+            'slug' => "required|unique:categorias,slug,$categoria->id",
+            'banner' => 'image|max:2048',
+        ]);
+
+        $cat = $request->all();
+
+        if ($image = $request->file('image')) {
+            $rutaGuardarImg = 'img/categorias/';
+            $imageCategoria = date('YmdHis') . "." . $image->getClientOriginalExtension();
+            $image->move($rutaGuardarImg, $imageCategoria);
+            $cat['image'] = "$imageCategoria";
+        } else {
+            unset($cat['image']);
+        }
+
+        $categoria->update($cat);
+        return redirect()->route('admin.categorias.edit', compact('categoria'))->with('info', 'La categoria se actualizo con exito');
     }
 
     /**
@@ -78,8 +115,9 @@ class CategoriaController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Categoria $categoria)
     {
-        //
+        $categoria->delete();
+        return redirect()->route('admin.categorias.index')->with('info', 'La categoria se elimino con exito');
     }
 }
