@@ -4,6 +4,8 @@ namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use App\Models\Location;
+use App\Models\Zone;
 
 class DatabaseSeeder extends Seeder
 {
@@ -22,5 +24,8 @@ class DatabaseSeeder extends Seeder
         // ]);
 
         $this->call(UserSeeder::class);
+        $this->call(CategoriaSeeder::class);
+        Location::factory(20)->create();
+        Zone::factory(4)->create();
     }
 }
