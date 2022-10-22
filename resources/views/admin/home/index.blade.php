@@ -30,19 +30,19 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach ($categorias as $categoria)
+                    @foreach ($homes as $home)
                         <tr>
-                            <td>{{ $categoria->id }}</td>
+                            <td>{{ $home->id }}</td>
                             <td width="300px">
-                                <img src="/img/categorias/{{ $categoria->image }}" class="banner_admin">
+                                <img src="/img/hogares/{{ $home->image }}" class="banner_admin">
                             </td>
-                            <td>{{ $categoria->name }}</td>
+                            <td>{{ $home->name }}</td>
                             <td width="10px">
-                                <a href="{{ route('admin.categorias.edit', $categoria) }}"
+                                <a href="{{ route('admin.homes.edit', $home) }}"
                                     class="btn btn-primary btn-sm">Editar</a>
                             </td>
                             <td width="10px">
-                                <form action="{{ route('admin.categorias.destroy', $categoria) }}" method="POST">
+                                <form action="{{ route('admin.homes.destroy', $home) }}" method="POST">
                                     @csrf
                                     @method('delete')
                                     <button type="submit" class="btn btn-danger btn-sm">Eliminar</button>

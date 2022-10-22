@@ -5,6 +5,7 @@ use App\Http\Controllers\Admin\HomeController;
 use App\Http\Controllers\Admin\CategoriaController;
 use App\Http\Controllers\Admin\LocationController;
 use App\Http\Controllers\Admin\ZoneController;
+use App\Http\Controllers\Admin\ApartController;
 
 Route::get('', [HomeController::class, 'index'])->name('admin.home');
 
@@ -14,3 +15,5 @@ Route::resource('categorias', CategoriaController::class)->names('admin.categori
 Route::resource('locations', LocationController::class)->names('admin.locations');
 
 Route::resource('zones', ZoneController::class)->names('admin.zones');
+
+Route::resource('homes', ApartController::class)->names('admin.homes');

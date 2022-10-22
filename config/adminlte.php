@@ -327,6 +327,11 @@ return [
             'route'  => 'admin.zones.index',
             'icon' => 'fab fa-fw fa-buffer',
         ],
+        [
+            'text' => 'Hogares',
+            'route'  => 'admin.homes.index',
+            'icon' => 'fab fa-fw fa-buffer',
+        ],
     ],
 
     /*
