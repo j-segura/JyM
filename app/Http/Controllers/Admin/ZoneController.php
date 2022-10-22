@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Models\Zone;
 
 class ZoneController extends Controller
 {
@@ -14,7 +15,8 @@ class ZoneController extends Controller
      */
     public function index()
     {
-        //
+        $zones = Zone::latest('id')->get();
+        return view('admin.zones.index', compact('zones'));
     }
 
     /**
@@ -24,7 +26,7 @@ class ZoneController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.zones.create');
     }
 
     /**
@@ -35,7 +37,14 @@ class ZoneController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'name' => 'required',
+            'slug' => 'required|unique:zones'
+        ]);
+
+        $zone = Zone::create($request->all());
+
+        return redirect()->route('admin.zones.edit', compact('zone'))->with('info', 'La zona se creo con exito');
     }
 
     /**
@@ -44,7 +53,7 @@ class ZoneController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Zone $zone)
     {
         //
     }
@@ -55,9 +64,9 @@ class ZoneController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Zone $zone)
     {
-        //
+        return view('admin.zones.edit', compact('zone'));
     }
 
     /**
@@ -67,9 +76,16 @@ class ZoneController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Zone $zone)
     {
-        //
+        $request->validate([
+            'name' => 'required',
+            'slug' => "required|unique:zones,slug,$zone->id"
+        ]);
+
+        $zone->update($request->all());
+
+        return redirect()->route('admin.zones.edit', $zone)->with('info', 'La zona se actualizo con exito');
     }
 
     /**
@@ -78,8 +94,9 @@ class ZoneController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Zone $zone)
     {
-        //
+        $zone->delete();
+        return redirect()->route('admin.zones.index')->with('info', 'La zona se elimino con exito');
     }
 }

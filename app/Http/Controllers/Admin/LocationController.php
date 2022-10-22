@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Models\Location;
 
 class LocationController extends Controller
 {
@@ -14,7 +15,8 @@ class LocationController extends Controller
      */
     public function index()
     {
-        //
+        $locations = Location::latest('id')->get();
+        return view('admin.locations.index', compact('locations'));
     }
 
     /**
@@ -24,7 +26,7 @@ class LocationController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.locations.create');
     }
 
     /**
@@ -35,7 +37,14 @@ class LocationController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'name' => 'required',
+            'slug' => 'required|unique:locations'
+        ]);
+
+        $location = Location::create($request->all());
+
+        return redirect()->route('admin.locations.edit', compact('location'))->with('info', 'La ubicacion se creo con exito');
     }
 
     /**
@@ -44,9 +53,8 @@ class LocationController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Location $location)
     {
-        //
     }
 
     /**
@@ -55,9 +63,9 @@ class LocationController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Location $location)
     {
-        //
+        return view('admin.locations.edit', compact('location'));
     }
 
     /**
@@ -67,9 +75,16 @@ class LocationController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Location $location)
     {
-        //
+        $request->validate([
+            'name' => 'required',
+            'slug' => "required|unique:locations,slug,$location->id"
+        ]);
+
+        $location->update($request->all());
+
+        return redirect()->route('admin.locations.edit', $location)->with('info', 'La ubicacion se actualizo con exito');
     }
 
     /**
@@ -78,8 +93,9 @@ class LocationController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Location $location)
     {
-        //
+        $location->delete();
+        return redirect()->route('admin.locations.index')->with('info', 'La ubicaion se elimino con exito');
     }
 }

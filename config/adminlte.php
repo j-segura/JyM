@@ -317,6 +317,16 @@ return [
             'route'  => 'admin.categorias.index',
             'icon' => 'fab fa-fw fa-buffer',
         ],
+        [
+            'text' => 'Ubicaciones',
+            'route'  => 'admin.locations.index',
+            'icon' => 'fab fa-fw fa-buffer',
+        ],
+        [
+            'text' => 'Zonas',
+            'route'  => 'admin.zones.index',
+            'icon' => 'fab fa-fw fa-buffer',
+        ],
     ],
 
     /*
