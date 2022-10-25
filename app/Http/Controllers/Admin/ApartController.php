@@ -3,8 +3,11 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Categoria;
 use Illuminate\Http\Request;
 use App\Models\Home;
+use App\Models\Location;
+use App\Models\Zone;
 
 class ApartController extends Controller
 {
@@ -26,7 +29,10 @@ class ApartController extends Controller
      */
     public function create()
     {
-        return view('admin.home.create');
+        $categorias = Categoria::pluck('name', 'id')->toArray();
+        $locations = Location::pluck('name', 'id')->toArray();
+        $zones = Zone::pluck('name', 'id')->toArray();
+        return view('admin.home.create', compact('categorias', 'locations', 'zones'));
     }
 
     /**
@@ -37,7 +43,33 @@ class ApartController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate(
+            [
+                'name' => 'required',
+                'slug' => 'required|unique:homes',
+                'metrosCuadrados' => 'required',
+                'valor' => 'required',
+                'direccion' => 'required',
+                'image' => 'required|image|max:2048',
+                'descripcion' => 'required',
+                'categoria_id' => 'required',
+                'location_id' => 'required',
+                'zone_id' => 'required',
+            ]
+        );
+
+        $home = $request->all();
+
+        if ($image = $request->file('image')) {
+            $rutaGuardarImg = 'img/hogares/';
+            $imageHome = "articulo" . date('YmdHis') . "." . $image->getClientOriginalExtension();
+            $image->move($rutaGuardarImg, $imageHome);
+            $home['image'] = "$imageHome";
+        }
+
+        $home = Home::create($home);
+
+        return redirect()->route('admin.homes.edit', compact('home'))->with('info', 'La propiedad se agrego con exito!');
     }
 
     /**
@@ -59,7 +91,10 @@ class ApartController extends Controller
      */
     public function edit(Home $home)
     {
-        return view('admin.home.edit', compact('home'));
+        $categorias = Categoria::pluck('name', 'id')->toArray();
+        $locations = Location::pluck('name', 'id')->toArray();
+        $zones = Zone::pluck('name', 'id')->toArray();
+        return view('admin.home.edit', compact('home', 'categorias', 'locations', 'zones'));
     }
 
     /**
@@ -71,7 +106,35 @@ class ApartController extends Controller
      */
     public function update(Request $request, Home $home)
     {
-        //
+        $request->validate(
+            [
+                'name' => 'required',
+                'slug' => "required|unique:homes,slug,$home->id",
+                'metrosCuadrados' => 'required',
+                'valor' => 'required',
+                'direccion' => 'required',
+                'image' => 'image|max:2048',
+                'descripcion' => 'required',
+                'categoria_id' => 'required',
+                'location_id' => 'required',
+                'zone_id' => 'required',
+            ]
+        );
+
+        $prop = $request->all();
+
+        if ($image = $request->file('image')) {
+            $rutaGuardarImg = 'img/hogares/';
+            $imageHome = "articulo" . date('YmdHis') . "." . $image->getClientOriginalExtension();
+            $image->move($rutaGuardarImg, $imageHome);
+            $prop['image'] = "$imageHome";
+        }else{
+            unset($prop['image']);
+        }
+
+        $home->update($prop);
+
+        return redirect()->route('admin.homes.edit', compact('home'))->with('info', 'La propiedad se actualizo con exito!');
     }
 
     /**

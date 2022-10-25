@@ -14,7 +14,7 @@
                 'enctype' => 'multipart/form-data'
             ]) !!}
 
-            @include('admin.homes.partials.form')
+            @include('admin.home.partials.form')
 
             {!! Form::submit('Agregar hogar', ['class' => 'btn btn-primary']) !!}
             {!! Form::close() !!}

@@ -26,7 +26,7 @@
                 'enctype' => 'multipart/form-data'
             ]) !!}
 
-            @include('admin.homes.partials.form')
+            @include('admin.home.partials.form')
 
             {!! Form::submit('Actualizar homes', ['class' => 'btn btn-primary']) !!}
             {!! Form::close() !!}

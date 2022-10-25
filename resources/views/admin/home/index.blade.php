@@ -3,7 +3,7 @@
 @section('title', 'Dashboard')
 
 @section('content_header')
-    <h1>Lista de categorias</h1>
+    <h1>Lista de Hogares</h1>
 @stop
 
 @section('content')
@@ -17,7 +17,7 @@
     <div class="card">
         <div class="card-body">
             <div class="card-header pl-0">
-                <a href="{{ route('admin.categorias.create') }}" class="btn btn-secondary">Agregar nueva categoria</a>
+                <a href="{{ route('admin.homes.create') }}" class="btn btn-secondary">Agregar nueva categoria</a>
             </div>
 
             <table class="table table-striped">
